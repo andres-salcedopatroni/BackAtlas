@@ -33,8 +33,8 @@ router.delete('/eliminar', async function(req, res, next) {
     const pedido=req.body;
     var eliminados=0;
     for (const e of pedido.eliminar){
-      var num = await estudiantes.deleteMany({usuario: e.usuario});
-      eliminados=num+eliminados;
+      var num = await estudiantes.deleteMany({usuario: e});
+      eliminados=num.deletedCount+eliminados;
     }
     res.json({"eliminados":eliminados});
   }
