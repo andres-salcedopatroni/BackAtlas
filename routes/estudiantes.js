@@ -28,4 +28,19 @@ router.post('/agregar', function(req, res, next) {
   res.json({e});
 });
 
+router.delete('/eliminar', async function(req, res, next) {
+  try{
+    const pedido=req.body;
+    var eliminados=0;
+    for (const e of pedido.eliminar){
+      var num = await estudiantes.deleteMany({usuario: e.usuario});
+      eliminados=num+eliminados;
+    }
+    res.json({"eliminados":eliminados});
+  }
+  catch(error){
+    res.status(500).send(error);
+  }
+});
+
 module.exports = router;
