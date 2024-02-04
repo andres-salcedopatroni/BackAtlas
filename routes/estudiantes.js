@@ -16,6 +16,14 @@ router.get('/mostrar', async function(req, res, next) {
   catch{}
 });
 
+router.get('/obtener/:usuario', async function(req, res, next) {
+  try{
+  const usuario=req.params.usuario
+  const e=await estudiantes.findOne({usuario:usuario});
+  res.json(e);}
+  catch{}
+});
+
 router.post('/agregar', function(req, res, next) {
   const pedido=req.body
   const e=new estudiantes({
