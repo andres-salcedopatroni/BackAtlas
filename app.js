@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require('cors')
 var indexRouter = require('./routes/index');
 const estudiantesRouter = require('./routes/estudiantes');
+
 //Conexion Atlas
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://USER:1234@cluster0.4wtcxn6.mongodb.net/Tesis?retryWrites=true&w=majority');

@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const schema_estudiantes=require('../schemas/schema_estudiantes');
+const schema_tweets=require('../schemas/schema_tweets');
 const estudiantes = mongoose.model('Estudiantes', schema_estudiantes,'Estudiantes');
+const tweets = mongoose.model('Tweets', schema_tweets,'Tweets');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -33,6 +35,14 @@ router.post('/agregar', function(req, res, next) {
     correo: pedido.correo,
     celular: pedido.celular,});
   e.save();
+  for (const m of pedido.mensajes){
+    const t=new tweets({
+      mensaje: m.texto, 
+      fecha: m.fecha,
+      usuario: pedido.usuario
+    });
+    t.save();
+  }
   res.json({e});
 });
 
