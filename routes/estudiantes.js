@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
+//Modulos
+const axios = require('axios');
 const mongoose = require('mongoose');
+//Mongo
 const schema_estudiantes=require('../schemas/schema_estudiantes');
 const schema_tweets=require('../schemas/schema_tweets');
 const estudiantes = mongoose.model('Estudiantes', schema_estudiantes,'Estudiantes');
@@ -28,6 +31,13 @@ router.get('/obtener/:usuario', async function(req, res, next) {
 
 router.post('/agregar', function(req, res, next) {
   const pedido=req.body
+  axios.post("https://andressalcedo2023.pythonanywhere.com/tweets",{"usuario": pedido.usuario})
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log('Error: ', err.message);
+  });
   const e=new estudiantes({
     nombre: pedido.nombre, 
     usuario: pedido.usuario,
