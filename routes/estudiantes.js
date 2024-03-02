@@ -30,30 +30,32 @@ router.get('/obtener/:usuario', async function(req, res, next) {
 });
 
 router.post('/agregar', function(req, res, next) {
-  const pedido=req.body
+  
+  const pedido=req.body;
+  var respuesta;
   axios.post("https://andressalcedo2023.pythonanywhere.com/tweets",{"usuario": pedido.usuario})
   .then(res => {
-    console.log(res);
+    const e=new estudiantes({
+      nombre: pedido.nombre, 
+      usuario: pedido.usuario,
+      codigo: pedido.codigo,
+      correo: pedido.correo,
+      celular: pedido.celular,});
+    e.save();
+    for (const m of res){
+      const t=new tweets({
+        mensaje: m.texto, 
+        fecha: m.fecha,
+        usuario: pedido.usuario
+      });
+      t.save();
+    }
+    respuesta="Realizado"
   })
   .catch(err => {
-    console.log('Error: ', err.message);
+    respuesta=err
   });
-  const e=new estudiantes({
-    nombre: pedido.nombre, 
-    usuario: pedido.usuario,
-    codigo: pedido.codigo,
-    correo: pedido.correo,
-    celular: pedido.celular,});
-  e.save();
-  for (const m of pedido.mensajes){
-    const t=new tweets({
-      mensaje: m.texto, 
-      fecha: m.fecha,
-      usuario: pedido.usuario
-    });
-    t.save();
-  }
-  res.json({e});
+  res.json({'mensaje':respuesta});
 });
 
 router.delete('/eliminar', async function(req, res, next) {
