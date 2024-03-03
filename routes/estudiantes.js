@@ -25,7 +25,8 @@ router.get('/obtener/:usuario', async function(req, res, next) {
   try{
   const usuario=req.params.usuario
   const e=await estudiantes.findOne({usuario:usuario});
-  res.json(e);}
+  const t=await tweets.find({usuario:usuario});
+  res.json({"estudiante":e,"tweets":t});}
   catch{}
 });
 
