@@ -36,7 +36,6 @@ router.post('/agregar', function(req, res, next) {
   axios.post("https://andressalcedo2023.pythonanywhere.com/tweets",{"usuario": pedido.usuario})
   .then(datos => {
     const tweets_usuario=datos.data;
-    console.log(tweets_usuario)
     const e=new estudiantes({
       nombre: pedido.nombre, 
       usuario: pedido.usuario,
@@ -47,6 +46,7 @@ router.post('/agregar', function(req, res, next) {
     try{
       for (const m of tweets_usuario){
         const t=new tweets({
+          estado: m.estado,
           mensaje: m.texto, 
           fecha: m.fecha,
           usuario: pedido.usuario

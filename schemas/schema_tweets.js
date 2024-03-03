@@ -4,7 +4,8 @@ const schema_tweets= new Schema(
     { 
         usuario: String,
         mensaje: String,
-        fecha: Date
+        fecha: Date,
+        estado: Number,
     });
 
 module.exports=schema_tweets
