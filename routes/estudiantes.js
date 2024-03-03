@@ -32,9 +32,11 @@ router.get('/obtener/:usuario', async function(req, res, next) {
 router.post('/agregar', function(req, res, next) {
   
   const pedido=req.body;
-  var respuesta;
+  let respuesta;
   axios.post("https://andressalcedo2023.pythonanywhere.com/tweets",{"usuario": pedido.usuario})
-  .then(res => {
+  .then(datos => {
+    const tweets_usuario=datos.data;
+    console.log(tweets_usuario)
     const e=new estudiantes({
       nombre: pedido.nombre, 
       usuario: pedido.usuario,
@@ -42,20 +44,24 @@ router.post('/agregar', function(req, res, next) {
       correo: pedido.correo,
       celular: pedido.celular,});
     e.save();
-    for (const m of res){
-      const t=new tweets({
-        mensaje: m.texto, 
-        fecha: m.fecha,
-        usuario: pedido.usuario
-      });
-      t.save();
+    try{
+      for (const m of tweets_usuario){
+        const t=new tweets({
+          mensaje: m.texto, 
+          fecha: m.fecha,
+          usuario: pedido.usuario
+        });
+        t.save();
+      }
+      res.json({'mensaje':1});
+    }catch(error){
+      res.status(500).send(err);
     }
-    respuesta="Realizado"
   })
   .catch(err => {
-    respuesta=err
+    res.status(500).send(err);
   });
-  res.json({'mensaje':respuesta});
+  
 });
 
 router.delete('/eliminar', async function(req, res, next) {
