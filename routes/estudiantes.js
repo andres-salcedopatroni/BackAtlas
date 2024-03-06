@@ -30,12 +30,12 @@ router.get('/obtener/:usuario', async function(req, res, next) {
   catch{}
 });
 
-router.post('/agregar', function(req, res, next) {
+router.post('/agregar',async function(req, res, next) {
   
   const pedido=req.body;
   let respuesta;
   console.log(pedido);
-  axios.post("https://andressalcedo2023.pythonanywhere.com/tweets",{"usuario": pedido.usuario})
+  await axios.post("https://andressalcedo2023.pythonanywhere.com/tweets",{"usuario": pedido.usuario})
   .then(datos => {
     const tweets_usuario=datos.data;
     const e=new estudiantes({
