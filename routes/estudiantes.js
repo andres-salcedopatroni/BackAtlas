@@ -35,16 +35,16 @@ router.post('/agregar',async function(req, res, next) {
   const pedido=req.body;
   let respuesta;
   console.log(pedido);
+  const e=new estudiantes({
+    nombre: pedido.nombre, 
+    usuario: pedido.usuario,
+    codigo: pedido.codigo,
+    correo: pedido.correo,
+    celular: pedido.celular,});
+  e.save();
+  console.log(e);
   datos=await axios.post("https://andressalcedo2023.pythonanywhere.com/tweets",{"usuario": pedido.usuario})
   const tweets_usuario=datos.data;
-    const e=new estudiantes({
-      nombre: pedido.nombre, 
-      usuario: pedido.usuario,
-      codigo: pedido.codigo,
-      correo: pedido.correo,
-      celular: pedido.celular,});
-    e.save();
-    console.log(e);
     try{
       for (const m of tweets_usuario){
         const t=new tweets({
