@@ -34,6 +34,7 @@ router.post('/agregar', function(req, res, next) {
   
   const pedido=req.body;
   let respuesta;
+  console.log(pedido);
   axios.post("https://andressalcedo2023.pythonanywhere.com/tweets",{"usuario": pedido.usuario})
   .then(datos => {
     const tweets_usuario=datos.data;
