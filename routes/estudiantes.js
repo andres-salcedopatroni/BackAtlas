@@ -44,6 +44,7 @@ router.post('/agregar', function(req, res, next) {
       correo: pedido.correo,
       celular: pedido.celular,});
     e.save();
+    console.log(e);
     try{
       for (const m of tweets_usuario){
         const t=new tweets({
