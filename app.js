@@ -9,7 +9,7 @@ const estudiantesRouter = require('./routes/estudiantes');
 
 //Conexion Atlas
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://USER:1234@cluster0.4wtcxn6.mongodb.net/Tesis?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://User2:1234@cluster0.4wtcxn6.mongodb.net/Tesis?retryWrites=true&w=majority');
 
 var app = express();
 
