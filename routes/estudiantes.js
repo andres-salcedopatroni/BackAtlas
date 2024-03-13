@@ -30,24 +30,26 @@ router.get('/obtener/:usuario', async function(req, res, next) {
   catch{}
 });
 
-router.post('/agregar',async function(req, res, next) {
-  
-  const pedido=req.body;
-  try{
-    const e=new estudiantes({
-      nombre: pedido.nombre, 
-      usuario: pedido.usuario,
-      codigo: pedido.codigo,
-      correo: pedido.correo,
-      celular: pedido.celular,
-    });
-    await e.save();
-    res.json({'mensaje':1});
+router.post('/agregar', 
+  async function(req, res, next) {
+    const pedido=req.body;
+    try{
+      const e=new estudiantes({
+        nombre: pedido.nombre, 
+        usuario: pedido.usuario,
+        codigo: pedido.codigo,
+        correo: pedido.correo,
+        celular: pedido.celular,
+      });
+      await e.save();
+      res.json({'mensaje':1});
+    }
+    catch(error){
+      console.log(error)
+      res.status(500).send(error)
+    };
   }
-  catch(error){
-    res.status(500).send(error)
-  };
-});
+);
 
 router.delete('/eliminar', async function(req, res, next) {
   try{
