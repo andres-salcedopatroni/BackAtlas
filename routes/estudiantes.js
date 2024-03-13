@@ -46,7 +46,7 @@ router.post('/agregar',
     }
     catch(error){
       console.log(error)
-      res.status(500).send(error.toString())
+      res.status(500).send(error)
     };
   }
 );
