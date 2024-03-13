@@ -7,7 +7,7 @@ const schema_estudiantes = new Schema(
         codigo: String,
         correo: String,
         celular: Number,
-
+        fecha: Date
     });
 
 module.exports=schema_estudiantes
