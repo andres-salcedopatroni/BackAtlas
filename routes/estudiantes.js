@@ -46,7 +46,7 @@ router.post('/agregar',
     }
     catch(error){
       console.log(error)
-      res.status(400).json({'error':error})
+      res.status(400).json({'mensaje':'Uno de los valores de los campos ya ha sido registrado:'+error})
     };
   }
 );
