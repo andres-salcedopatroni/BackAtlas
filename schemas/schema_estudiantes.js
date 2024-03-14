@@ -5,6 +5,7 @@ const schema_estudiantes = new Schema(
         nombre: String, 
         usuario: {type: String, unique: true },
         codigo: String,
+        escuela: String,
         correo: {type: String, unique: true },
         celular: {type: Number, unique: true },
         fecha: Date
