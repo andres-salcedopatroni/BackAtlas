@@ -32,21 +32,22 @@ router.get('/obtener/:usuario', async function(req, res, next) {
 
 router.post('/agregar', 
   async function(req, res, next) {
-    const pedido=req.body;
+    const pedido = req.body;
     try{
-      const e=new estudiantes({
+      const e = new estudiantes({
         nombre: pedido.nombre, 
         usuario: pedido.usuario,
         codigo: pedido.codigo,
         correo: pedido.correo,
         celular: pedido.celular,
+        escuela: pedido.escuela
       });
       await e.save();
       res.json({'mensaje':1});
     }
     catch(error){
       console.log(error)
-      res.status(400).json({'mensaje':'Uno de los valores de los campos ya ha sido registrado:'+ error})
+      res.status(400).json({'mensaje':'Uno de los valores de los campos ya ha sido registrado:'+error})
     };
   }
 );
