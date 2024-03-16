@@ -23,9 +23,10 @@ router.get('/mostrar', async function(req, res, next) {
 
 router.get('/obtener/:usuario', async function(req, res, next) {
   try{
-  const usuario=req.params.usuario
+  const usuario=req.params.usuario;
   const e=await estudiantes.findOne({usuario:usuario});
-  const t=await tweets.find({usuario:usuario}).sort({fecha: -1});;
+  const t=await tweets.find({usuario:usuario}).sort({fecha: -1});
+  console.log(t);
   res.json({"estudiante":e,"tweets":t});}
   catch{}
 });
