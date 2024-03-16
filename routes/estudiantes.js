@@ -26,7 +26,6 @@ router.get('/obtener/:usuario', async function(req, res, next) {
   const usuario=req.params.usuario;
   const e=await estudiantes.findOne({usuario:usuario});
   const t=await tweets.find({usuario:usuario}).sort({fecha: -1});
-  console.log({"estudiante":e,"tweets":t});
   res.json({"estudiante":e,"tweets":t});}
   catch{}
 });
