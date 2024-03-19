@@ -17,7 +17,6 @@ router.get('/', function(req, res, next) {
 router.get('/mostrar', async function(req, res, next) {
   try{
   const e=await estudiantes.find({});
-  console.log(new Date());
   res.json(e);}
   catch{}
 });
