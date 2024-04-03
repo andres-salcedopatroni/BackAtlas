@@ -1,18 +1,12 @@
 var express = require('express');
 var router = express.Router();
 //Modulos
-const axios = require('axios');
 const mongoose = require('mongoose');
 //Mongo
 const schema_estudiantes=require('../schemas/schema_estudiantes');
 const schema_tweets=require('../schemas/schema_tweets');
 const estudiantes = mongoose.model('Estudiantes', schema_estudiantes,'Estudiantes');
 const tweets = mongoose.model('Tweets', schema_tweets,'Tweets');
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
 router.get('/mostrar', async function(req, res, next) {
   try{
