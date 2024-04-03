@@ -1,15 +1,21 @@
+require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
-var indexRouter = require('./routes/index');
 const estudiantesRouter = require('./routes/estudiantes');
+
+//ENV
+const USUARIO = process.env.USUARIO;
+const CLAVE = process.env.CLAVE;
+const CLUSTER = process.env.CLUSTER;
+const BD = process.env.BD;
 
 //Conexion Atlas
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://User2:1234@cluster0.4wtcxn6.mongodb.net/Tesis?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://'+USUARIO+':'+CLAVE+'@'+CLUSTER+'/'+BD+'?retryWrites=true&w=majority');
 
 var app = express();
 
@@ -22,8 +28,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
 app.use('/estudiantes', estudiantesRouter);
 
 // catch 404 and forward to error handler
