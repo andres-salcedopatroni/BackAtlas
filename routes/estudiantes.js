@@ -21,7 +21,6 @@ router.get('/mostrar', async function(req, res, next) {
       var cantidad = 0;
       var tweets_depresivos_mensual = 0;
       var cantidad_mensual = 0;
-      dato.estado = 0;  
       for(let tweet of lista_tweets){
         if (tweet.estado == 1){
           tweets_depresivos = tweets_depresivos + 1;
@@ -34,20 +33,13 @@ router.get('/mostrar', async function(req, res, next) {
       }
       if(cantidad > 0){
         var porcentaje_depresivo = tweets_depresivos/cantidad;
-        if(cantidad_mensual > 0){ 
-          var porcentaje_depresivo_mensual = tweets_depresivos_mensual/cantidad_mensual;
-          if(porcentaje_depresivo >= 0.5 && porcentaje_depresivo_mensual >= 0.5)
-            dato.estado = 2; 
-          else{
-            if(porcentaje_depresivo >= 0.5 || porcentaje_depresivo_mensual >= 0.5)
-              dato.estado = 1; 
-          }
-        }
+        if(porcentaje_depresivo >= 0.5 && dato.estado == 1)
+          dato.estado = 2; 
         else{
-          if(porcentaje_depresivo >= 0.5)
-            dato.estado = 2; 
+          if(porcentaje_depresivo < 0.5 && dato.estado == 1)
+          dato.estado = 1; 
         }
-      }      
+        }    
       datos.push(dato);
     }
     res.json(datos);
