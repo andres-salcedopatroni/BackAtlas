@@ -15,7 +15,7 @@ router.get('/mostrar', async function(req, res, next) {
     const fecha = new Date();
     fecha.setMonth(fecha.getMonth()-1);
     for(let estudiante of lista_estudiantes){
-      var dato = {"nombre":estudiante.nombre,"usuario":estudiante.usuario}
+      var dato = {"nombre":estudiante.nombre,"usuario":estudiante.usuario,"estado":estudiante.estado}
       var lista_tweets = await tweets.find({usuario:estudiante.usuario}).sort({fecha: -1});
       var tweets_depresivos = 0;
       var cantidad = 0;
