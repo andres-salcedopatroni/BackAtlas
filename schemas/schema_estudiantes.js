@@ -8,7 +8,8 @@ const schema_estudiantes = new Schema(
         escuela: String,
         correo: {type: String, unique: true },
         celular: {type: Number, unique: true },
-        fecha: Date
+        fecha: Date,
+        estado: Number
     });
 
 module.exports=schema_estudiantes
